@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate,Link } from 'react-router-dom';
+import logo from '../assets/logoPraktikly.png'
 
 const modulesData = {
   1: [
@@ -8,11 +9,46 @@ const modulesData = {
       title: 'Introduction to Full Stack Development',
       description: 'Learn the fundamentals of full stack development and web architecture',
       lessons: [
-        { id: 'lesson1', title: 'What is Full Stack Development?', video: 'https://www.youtube.com/embed/Zftx68K-1D4', resource: '/resources/fullstack_intro.pdf', duration: '8:32' },
-        { id: 'lesson2', title: 'Frontend vs Backend', video: 'https://www.youtube.com/embed/srvUrASNj0s', resource: '/resources/frontend_backend.pdf', duration: '10:15' },
-        { id: 'lesson3', title: 'Client-Server Architecture', video: 'https://www.youtube.com/embed/1tRLveSyNz8', resource: '/resources/client_server.pdf', duration: '12:45' },
-        { id: 'lesson4', title: 'How the Web Works', video: 'https://www.youtube.com/embed/DQh5zR_Ij5w', resource: '/resources/web_working.pdf', duration: '15:20' },
-        { id: 'lesson5', title: 'HTTP Basics', video: 'https://www.youtube.com/embed/eesqK59rhGA', resource: '/resources/http_basics.pdf', duration: '9:50' },
+        { 
+          id: 'lesson1', 
+          title: 'What is Full Stack Development?', 
+          video: 'https://www.youtube.com/embed/Zftx68K-1D4', 
+          resource: '/resources/fullstack_intro.pdf', 
+          duration: '8:32',
+          summary: 'Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.Full stack development refers to the development of both the front-end and back-end components of a web application. It includes technologies like HTML, CSS, JavaScript, Node.js, React, and MongoDB. It is a rapidly growing field in the tech industry.  '     
+        },
+        { 
+          id: 'lesson2', 
+          title: 'Frontend vs Backend', 
+          video: 'https://www.youtube.com/embed/srvUrASNj0s', 
+          resource: '/resources/frontend_backend.pdf', 
+          duration: '10:15',
+          summary: 'Frontend development focuses on the visual interface and user interaction, while backend development handles server logic, databases, and APIs.'
+        },
+        { 
+          id: 'lesson3', 
+          title: 'Client-Server Architecture', 
+          video: 'https://www.youtube.com/embed/1tRLveSyNz8', 
+          resource: '/resources/client_server.pdf', 
+          duration: '12:45',
+          summary: 'Client-server architecture is a network structure where clients request services and servers provide responses, commonly used in web applications.'
+        },
+        { 
+          id: 'lesson4', 
+          title: 'How the Web Works', 
+          video: 'https://www.youtube.com/embed/DQh5zR_Ij5w', 
+          resource: '/resources/web_working.pdf', 
+          duration: '15:20',
+          summary: 'This lesson explains how browsers, servers, DNS, and HTTP work together to deliver web content to users.'
+        },
+        { 
+          id: 'lesson5', 
+          title: 'HTTP Basics', 
+          video: 'https://www.youtube.com/embed/eesqK59rhGA', 
+          resource: '/resources/http_basics.pdf', 
+          duration: '9:50',
+          summary: 'HTTP is a protocol used for transferring data over the web, using methods like GET, POST, PUT, and DELETE.'
+        },
       ],
       quiz: {
         title: 'Module 1 Quiz',
@@ -131,6 +167,59 @@ const modulesData = {
   ],
 };
 
+const generateCertificate = () => {
+  // Create a canvas to generate the certificate as an image
+  const canvas = document.createElement('canvas');
+  canvas.width = 1200;
+  canvas.height = 800;
+  const ctx = canvas.getContext('2d');
+  
+  // Draw certificate background
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw border
+  ctx.strokeStyle = '#4F46E5';
+  ctx.lineWidth = 15;
+  ctx.strokeRect(50, 50, canvas.width - 100, canvas.height - 100);
+  
+  // Add text
+  ctx.fillStyle = '#4F46E5';
+  ctx.font = 'bold 48px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('CERTIFICATE OF COMPLETION', canvas.width / 2, 120);
+  
+  ctx.fillStyle = '#000000';
+  ctx.font = '24px Arial';
+  ctx.fillText('This is to certify that', canvas.width / 2, 180);
+  
+  ctx.font = 'bold 36px Arial';
+  ctx.fillText('[Student Name]', canvas.width / 2, 240);
+  
+  ctx.font = '24px Arial';
+  ctx.fillText('has successfully completed the course', canvas.width / 2, 300);
+  
+  ctx.font = 'bold 32px Arial';
+  ctx.fillText('Full Stack Development', canvas.width / 2, 360);
+  
+  ctx.font = '24px Arial';
+  ctx.fillText('with a final grade of 100%', canvas.width / 2, 420);
+  
+  ctx.fillText(`Date: ${new Date().toLocaleDateString()}`, canvas.width / 2, 500);
+  
+  // Convert canvas to image and download
+  canvas.toBlob((blob) => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'FullStackDevelopment_Certificate.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 'image/png');
+};
+
 const CourseLearning = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -138,11 +227,14 @@ const CourseLearning = () => {
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [completedLessons, setCompletedLessons] = useState(new Set());
   const [completedQuizzes, setCompletedQuizzes] = useState(new Set());
+  
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false); // or false if you want it collapsed by default
   const [quizAnswers, setQuizAnswers] = useState({});
   const [quizResults, setQuizResults] = useState({});
   const [activeTab, setActiveTab] = useState('lessons');
   const [notes, setNotes] = useState({});
   const [currentNote, setCurrentNote] = useState('');
+  const [showShareOptions, setShowShareOptions] = useState(false);
   const [discussionPosts, setDiscussionPosts] = useState([
     { id: 1, author: 'John Doe', content: 'Has anyone completed the React hooks lesson? I have some questions.', date: '2023-05-15', replies: [] },
     { id: 2, author: 'Jane Smith', content: 'The REST API concepts were explained really well in this course!', date: '2023-05-10', replies: [] },
@@ -157,6 +249,57 @@ const CourseLearning = () => {
     }
   }, [id]);
 
+    // Share function
+    const shareCourse = (platform) => {
+      const url = window.location.href;
+      let shareUrl = '';
+      
+      switch(platform) {
+        case 'whatsapp':
+          shareUrl = `https://wa.me/?text=Check out this course: ${url}`;
+          break;
+        case 'telegram':
+          shareUrl = `https://t.me/share/url?url=${url}&text=Check out this course`;
+          break;
+        case 'twitter':
+          shareUrl = `https://twitter.com/intent/tweet?text=Check out this course&url=${url}`;
+          break;
+        default:
+          navigator.clipboard.writeText(url);
+          alert('Link copied to clipboard!');
+          return;
+      }
+      
+      window.open(shareUrl, '_blank');
+      setShowShareOptions(false);
+    };
+  
+    // Toggle bookmark
+    const toggleBookmark = (lessonId) => {
+      setBookmarkedLessons(prev => {
+        const updated = new Set(prev);
+        if (updated.has(lessonId)) {
+          updated.delete(lessonId);
+        } else {
+          updated.add(lessonId);
+        }
+        return updated;
+      });
+    };
+  
+    // Change playback speed
+    const changeSpeed = (speed) => {
+      setPlaybackSpeed(speed);
+      setShowSpeedOptions(false);
+      // You would need to implement this on the video player
+    };
+  
+    // Fetch transcript (mock function)
+    const fetchTranscript = () => {
+      // In a real app, you would fetch this from your backend
+      setTranscript("This is a sample transcript for the video lesson. It would contain the spoken content from the video in text format.");
+      setShowTranscript(true);
+    };
   const toggleCompletion = (lessonId) => {
     setCompletedLessons((prev) => {
       const updated = new Set(prev);
@@ -258,123 +401,282 @@ const CourseLearning = () => {
   const allQuizzesCompleted = modules.every(module => completedQuizzes.has(module.id));
   const progressPercentage = allLessons.length > 0 ? Math.round((completedLessons.size / allLessons.length) * 100) : 0;
 
-  return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-   
+return (
+  <div className="flex flex-col min-h-screen bg-gray-50">
+    
+    <header className="bg-[#0f0f0f] border-b border-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          
+          {/* Left Logo */}
+          <div className="flex items-center space-x-2">
+            <Link to="/">
+              <img src={logo} alt="Praktikly Logo" className="h-8" />
+            </Link>
+            <span className="text-white font-semibold text-sm px-2">|</span>
+          </div>
+
+          {/* Center Course Title */}
+          <div className="flex-1 text-center">
+            <h1 className="text-white text-sm font-semibold">
+              Python for Beginners - <span className="text-gray-300">हिंदी में सीखें</span> Python Programming
+            </h1>
+          </div>
+
+          {/* Right: Progress + Share + Menu */}
+          <div className="flex items-center space-x-4">
+            
+            {/* Progress Dropdown-style */}
+            <div className="flex items-center space-x-2 text-white text-sm cursor-pointer group relative">
+              <div className="flex items-center space-x-1">
+                <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700">
+                  <span className="text-xs font-medium">{progressPercentage}%</span>
+                </div>
+                <span>Your progress</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                </svg>
+              </div>
+              
+              {/* Progress Tooltip */}
+              <div className="absolute top-full right-0 mt-2 w-64 p-3 bg-gray-800 rounded shadow-lg text-sm hidden group-hover:block z-50">
+                <div className="w-full bg-gray-700 rounded-full h-2 mb-2">
+                  <div 
+                    className="bg-green-500 h-2 rounded-full" 
+                    style={{ width: `${progressPercentage}%` }}
+                  ></div>
+                </div>
+                <p className="text-gray-300">
+                  {completedLessons.size} of {allLessons.length} lessons completed ({progressPercentage}%)
+                </p>
+              </div>
+            </div>
+
+            {/* Share Button */}
+            <button 
+              onClick={() => setShowShareOptions(!showShareOptions)}
+              className="border border-white text-white text-sm font-medium px-4 py-1 rounded hover:bg-white hover:text-black transition"
+            >
+              Share
+            </button>
+
+          
+          </div>
+        </div>
+      </div>
+    </header>
       <div className="flex flex-col lg:flex-row flex-1">
         {/* Sidebar */}
         <div className="w-full lg:w-1/4 bg-white p-4 border-r border-gray-200">
-          <button
-            onClick={() => navigate('/courses')}
-            className="mb-6 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center space-x-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            <span>Back to Courses</span>
-          </button>
+  <button
+    onClick={() => navigate('/courses')}
+    className="mb-6 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center space-x-2"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+    </svg>
+    <span>Back to Courses</span>
+  </button>
 
-          <div className="mb-6">
-            <h2 className="text-xl font-bold mb-4 text-gray-800">Course Progress</h2>
-            <div className="w-full bg-gray-200 rounded-full h-4 mb-2">
-              <div 
-                className="bg-green-500 h-4 rounded-full" 
-                style={{ width: `${progressPercentage}%` }}
-              ></div>
+  <div className="mb-6">
+  <h2 className="text-xl font-bold mb-4 text-gray-800">Course Progress</h2>
+  <div className="w-full bg-gray-200 rounded-full h-4 mb-2">
+    <div 
+      className="bg-green-500 h-4 rounded-full" 
+      style={{ width: `${progressPercentage}%` }}
+    ></div>
+  </div>
+  <p className="text-sm text-gray-600">
+    {completedLessons.size} of {allLessons.length} lessons completed ({progressPercentage}%)
+  </p>
+  
+  {progressPercentage === 100 && allQuizzesCompleted && (
+  <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-100">
+    <div className="flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+      </svg>
+      <span className="text-green-800 font-medium">Course Completed!</span>
+    </div>
+    <button
+      onClick={generateCertificate}
+      className="mt-2 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      Download Certificate
+    </button>
+  </div>
+)}
+</div>
+
+  <div className="mb-6">
+    <h2 className="text-xl font-bold mb-2 text-gray-800">Modules</h2>
+    <div className="space-y-4">
+      {modules.map((mod) => {
+        const moduleLessons = mod.lessons;
+        const completedModuleLessons = moduleLessons.filter(lesson => completedLessons.has(lesson.id)).length;
+        const moduleProgress = moduleLessons.length > 0 ? Math.round((completedModuleLessons / moduleLessons.length) * 100) : 0;
+
+        return (
+          <div key={mod.id} className="border rounded-lg overflow-hidden">
+            <div className="bg-gray-100 p-3 border-b">
+              <h3 className="font-semibold text-gray-800">{mod.title}</h3>
+              <p className="text-xs text-gray-500">{mod.description}</p>
             </div>
-            <p className="text-sm text-gray-600">
-              {completedLessons.size} of {allLessons.length} lessons completed ({progressPercentage}%)
-            </p>
-          </div>
-
-          <div className="mb-6">
-            <h2 className="text-xl font-bold mb-2 text-gray-800">Modules</h2>
-            <div className="space-y-4">
-              {modules.map((mod) => {
-                const moduleLessons = mod.lessons;
-                const completedModuleLessons = moduleLessons.filter(lesson => completedLessons.has(lesson.id)).length;
-                const moduleProgress = moduleLessons.length > 0 ? Math.round((completedModuleLessons / moduleLessons.length) * 100) : 0;
-
-                return (
-                  <div key={mod.id} className="border rounded-lg overflow-hidden">
-                    <div className="bg-gray-100 p-3 border-b">
-                      <h3 className="font-semibold text-gray-800">{mod.title}</h3>
-                      <p className="text-xs text-gray-500">{mod.description}</p>
-                    </div>
-                    <ul className="divide-y divide-gray-200">
-                      {mod.lessons.map((lesson) => (
-                        <li
-                          key={lesson.id}
-                          className={`p-3 cursor-pointer hover:bg-gray-50 transition ${
-                            selectedLesson?.id === lesson.id ? 'bg-blue-50 border-l-4 border-blue-500' : ''
-                          }`}
-                          onClick={() => {
-                            setSelectedLesson(lesson);
-                            setActiveTab('lessons');
-                          }}
-                        >
-                          <div className="flex justify-between items-start">
-                            <span className={`${
-                              selectedLesson?.id === lesson.id ? 'text-blue-600 font-medium' : 'text-gray-700'
-                            }`}>
-                              {lesson.title}
-                            </span>
-                            <span className="text-xs text-gray-500">{lesson.duration}</span>
-                          </div>
-                          {completedLessons.has(lesson.id) && (
-                            <span className="inline-flex items-center mt-1 text-xs text-green-600">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                              Completed
-                            </span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="p-3 bg-gray-50 border-t">
-                      <button
-                        onClick={() => {
-                          const firstUncompleted = mod.lessons.find(lesson => !completedLessons.has(lesson.id)) || mod.lessons[0];
-                          setSelectedLesson(firstUncompleted);
-                          setActiveTab('quiz');
-                        }}
-                        className={`w-full py-2 px-3 rounded-md text-sm font-medium ${
-                          completedQuizzes.has(mod.id)
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-indigo-100 text-indigo-800 hover:bg-indigo-200'
-                        }`}
-                      >
-                        {completedQuizzes.has(mod.id) ? 'Quiz Completed ✓' : 'Take Quiz'}
-                      </button>
-                    </div>
+            <ul className="divide-y divide-gray-200">
+              {mod.lessons.map((lesson) => (
+                <li
+                  key={lesson.id}
+                  className={`p-3 cursor-pointer hover:bg-gray-50 transition ${
+                    selectedLesson?.id === lesson.id ? 'bg-blue-50 border-l-4 border-blue-500' : ''
+                  }`}
+                  onClick={() => {
+                    setSelectedLesson(lesson);
+                    setActiveTab('lessons');
+                  }}
+                >
+                  <div className="flex justify-between items-start">
+                    <span className={`${
+                      selectedLesson?.id === lesson.id ? 'text-blue-600 font-medium' : 'text-gray-700'
+                    }`}>
+                      {lesson.title}
+                    </span>
+                    <span className="text-xs text-gray-500">{lesson.duration}</span>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2 text-gray-800">Resources</h3>
-            <ul className="space-y-2">
-              {allLessons.map((lesson) => (
-                <li key={lesson.id}>
-                  <a
-                    href={lesson.resource}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-blue-600 hover:text-blue-800 text-sm p-2 hover:bg-blue-50 rounded"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
-                    {lesson.title} (PDF)
-                  </a>
+                  {completedLessons.has(lesson.id) && (
+                    <span className="inline-flex items-center mt-1 text-xs text-green-600">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Completed
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
+            <div className="p-3 bg-gray-50 border-t">
+              <button
+                onClick={() => {
+                  const firstUncompleted = mod.lessons.find(lesson => !completedLessons.has(lesson.id)) || mod.lessons[0];
+                  setSelectedLesson(firstUncompleted);
+                  setActiveTab('quiz');
+                }}
+                className={`w-full py-2 px-3 rounded-md text-sm font-medium ${
+                  completedQuizzes.has(mod.id)
+                    ? 'bg-green-100 text-green-800'
+                    : 'bg-indigo-100 text-indigo-800 hover:bg-indigo-200'
+                }`}
+              >
+                {completedQuizzes.has(mod.id) ? 'Quiz Completed ✓' : 'Take Quiz'}
+              </button>
+            </div>
           </div>
-        </div>
+        );
+      })}
+           {/* Course Completion Modal */}
+           {isCourseCompleted && (
+  <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-100">
+    <div className="flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+      </svg>
+      <span className="text-green-800 font-medium">Course Completed!</span>
+    </div>
+    <button
+      onClick={generateCertificate}
+      className="mt-2 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      Download Certificate
+    </button>
+  </div>
+)}
+    </div>
+  </div>
+  <div className="border-t pt-4">
+  <div className="flex items-center justify-between mb-3">
+    <h3 className="text-lg font-semibold text-gray-800 flex items-center">
+      <button 
+        onClick={() => setIsResourcesOpen(!isResourcesOpen)}
+        className="mr-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          className={`h-5 w-5 transition-transform duration-200 ${isResourcesOpen ? 'rotate-90' : ''}`} 
+          viewBox="0 0 20 20" 
+          fill="currentColor"
+        >
+          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+        </svg>
+      </button>
+      <span>Resources</span>
+      <span className="ml-2 text-xs font-normal bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+        {allLessons.length}
+      </span>
+    </h3>
+    <span className="text-gray-500">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+      </svg>
+    </span>
+  </div>
+  
+
+  {isResourcesOpen && (
+    <div className="space-y-3">
+      {allLessons.map((lesson) => (
+        <a
+          key={lesson.id}
+          href={lesson.resource}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors group"
+        >
+          <div className={`p-2 rounded-lg mr-3 ${
+            lesson.resourceType === 'pdf' ? 'bg-red-100' :
+            lesson.resourceType === 'video' ? 'bg-purple-100' :
+            'bg-blue-100'
+          }`}>
+            {lesson.resourceType === 'pdf' && (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            )}
+            {lesson.resourceType === 'video' && (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            )}
+            {lesson.resourceType === 'link' && (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
+            <h4 className="text-sm font-medium text-gray-800 truncate">{lesson.title}</h4>
+            <p className="text-xs text-gray-500 flex items-center">
+              <span className="inline-block px-1 py-0.5 rounded bg-gray-100 text-gray-600 mr-2">
+                {(lesson.resourceType || 'file').toUpperCase()}
+              </span>
+              {lesson.resourceSize || 'Download'}
+            </p>
+          </div>
+          <div className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
+</div>
+</div>
 
         {/* Main Content */}
         <div className="flex-1 p-6">
@@ -487,13 +789,31 @@ const CourseLearning = () => {
                         )}
                       </button>
                     </div>
+                    
 
                     <div className="mt-6 pt-6 border-t border-gray-200">
-                      <h3 className="text-lg font-medium text-gray-900 mb-3">Lesson Summary</h3>
-                      <p className="text-gray-700">
-                        This lesson covers the key concepts of {selectedLesson.title.toLowerCase()}. Make sure to download the resource PDF for additional reference material and examples.
-                      </p>
-                    </div>
+  <h3 className="text-lg font-medium text-gray-900 mb-3 flex items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-indigo-500" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+    </svg>
+    Lesson Summary
+  </h3>
+  <div className="bg-blue-50 p-4 rounded-lg">
+    <p className="text-gray-700">{selectedLesson.summary || 'No summary available for this lesson.'}</p>
+    {selectedLesson.keyPoints && (
+      <ul className="mt-3 space-y-2">
+        {selectedLesson.keyPoints.map((point, index) => (
+          <li key={index} className="flex items-start">
+            <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-gray-700">{point}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</div>
                   </div>
                 </div>
               ) : (
@@ -750,42 +1070,8 @@ const CourseLearning = () => {
         </div>
       </div>
 
-      {/* Course Completion Modal */}
-      {isCourseCompleted && allQuizzesCompleted && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-2xl w-full p-8 text-center">
-            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-              <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 className="mt-3 text-2xl font-medium text-gray-900">Course Completed!</h3>
-            <div className="mt-2">
-              <p className="text-lg text-gray-600">
-                Congratulations on completing the Full Stack Development course!
-              </p>
-              <p className="text-gray-600 mt-2">
-                You've successfully finished all lessons and passed all quizzes.
-              </p>
-            </div>
-            <div className="mt-6">
-              <button
-                type="button"
-                className="inline-flex justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Download Certificate
-              </button>
-              <button
-                type="button"
-                onClick={() => navigate('/courses')}
-                className="ml-4 inline-flex justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Back to Courses
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+ 
+
     </div>
   );
 };
