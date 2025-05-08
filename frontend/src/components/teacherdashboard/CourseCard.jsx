@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiEdit } from 'react-icons/fi';
 
-const CourseCard = ({ course, type, onPublish, onMoveToDraft, onDelete }) => {
+const CourseCard = ({ course, type, onPublish, onMoveToDraft, onDelete, onEdit }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-md mx-auto p-4">
       <img
@@ -35,7 +35,10 @@ const CourseCard = ({ course, type, onPublish, onMoveToDraft, onDelete }) => {
               >
                 Publish
               </button>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded">
+              <button 
+                onClick={() => onEdit(course)}
+                className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded"
+              >
                 <FiEdit />
               </button>
             </>
@@ -45,7 +48,7 @@ const CourseCard = ({ course, type, onPublish, onMoveToDraft, onDelete }) => {
                 View
               </button>
               <button
-                onClick={() => onMoveToDraft(course.id, type)}
+                onClick={() => onEdit(course)}
                 className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded"
               >
                 <FiEdit />
