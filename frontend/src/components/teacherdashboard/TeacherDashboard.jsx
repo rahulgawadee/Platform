@@ -9,7 +9,6 @@ const TeacherDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [courses, setCourses] = useState({ draft: [], ongoing: [], published: [] });
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
-  const [editingCourse, setEditingCourse] = useState(null);
   const [newCourse, setNewCourse] = useState({
     title: '',
     description: '',
@@ -62,31 +61,7 @@ const TeacherDashboard = () => {
     setStats(sampleStats);
   }, []);
 
-  const handleAddCourse = () => {
-    setEditingCourse(null);
-    setNewCourse({
-      title: '',
-      description: '',
-      category: '',
-      thumbnail: null,
-      thumbnailPreview: '',
-      modules: []
-    });
-    setShowAddCourseModal(true);
-  };
-
-  const handleEditCourse = (course) => {
-    setEditingCourse(course);
-    setNewCourse({
-      title: course.title,
-      description: course.description,
-      category: course.category || '',
-      thumbnail: null,
-      thumbnailPreview: course.thumbnail,
-      modules: course.modules || []
-    });
-    setShowAddCourseModal(true);
-  };
+  const handleAddCourse = () => setShowAddCourseModal(true);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -127,42 +102,16 @@ const TeacherDashboard = () => {
 
   const submitCourse = () => {
     if (newCourse.title.trim() === '' || newCourse.modules.length === 0) return;
-    
-    if (editingCourse) {
-      // Update existing course
-      const updatedCourses = { ...courses };
-      const courseType = Object.keys(courses).find(key => 
-        courses[key].some(c => c.id === editingCourse.id)
-      );
-      
-      if (courseType) {
-        updatedCourses[courseType] = updatedCourses[courseType].map(c => 
-          c.id === editingCourse.id ? { 
-            ...c, 
-            title: newCourse.title,
-            description: newCourse.description,
-            category: newCourse.category,
-            thumbnail: newCourse.thumbnailPreview || c.thumbnail,
-            modules: newCourse.modules
-          } : c
-        );
-        setCourses(updatedCourses);
-      }
-    } else {
-      // Create new course
-      const newCourseObj = {
-        id: `course${courses.draft.length + courses.ongoing.length + courses.published.length + 1}`,
-        title: newCourse.title,
-        description: newCourse.description,
-        thumbnail: newCourse.thumbnailPreview || 'https://via.placeholder.com/300x200?text=Course+Thumbnail',
-        modules: newCourse.modules,
-        createdAt: new Date().toISOString()
-      };
-      setCourses({ ...courses, draft: [...courses.draft, newCourseObj] });
-    }
-    
+    const newCourseObj = {
+      id: `course${courses.draft.length + courses.ongoing.length + courses.published.length + 1}`,
+      title: newCourse.title,
+      description: newCourse.description,
+      thumbnail: newCourse.thumbnailPreview || 'https://via.placeholder.com/300x200?text=Course+Thumbnail',
+      modules: newCourse.modules,
+      createdAt: new Date().toISOString()
+    };
+    setCourses({ ...courses, draft: [...courses.draft, newCourseObj] });
     setNewCourse({ title: '', description: '', category: '', thumbnail: null, thumbnailPreview: '', modules: [] });
-    setEditingCourse(null);
     setShowAddCourseModal(false);
   };
 
@@ -195,47 +144,24 @@ const TeacherDashboard = () => {
         {activeTab === 'dashboard' && (
           <div>
             <div className="mb-6">
-              <h1 className="text-2xl font-semibold text-gray-800">Welcome back, {teacherProfile.name}!</h1>
+              <h1 className="text-2xl font-semibold">Welcome back, {teacherProfile.name}!</h1>
               <p className="text-gray-600">Here's what's happening with your courses today.</p>
             </div>
             <DashboardStats stats={stats} />
             <div className="mt-8">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-800">Your Courses</h2>
-                <button 
-                  onClick={handleAddCourse} 
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
-                  </svg>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold">Your Courses</h2>
+                <button onClick={handleAddCourse} className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">
                   Add Course
                 </button>
               </div>
-              
               {['draft', 'ongoing', 'published'].map((status) => (
-                <div key={status} className="mb-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-medium text-gray-700 capitalize">{status} Courses</h3>
-                    {status === 'draft' && courses.draft.length > 0 && (
-                      <span className="text-sm text-gray-500">{courses.draft.length} items</span>
-                    )}
-                  </div>
-                  
+                <div key={status} className="mb-6">
+                  <h3 className="text-lg font-medium capitalize">{status} Courses</h3>
                   {courses[status].length === 0 ? (
-                    <div className="bg-white rounded-lg shadow p-6 text-center">
-                      <p className="text-gray-500">No {status} courses found.</p>
-                      {status === 'draft' && (
-                        <button 
-                          onClick={handleAddCourse}
-                          className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition"
-                        >
-                          Create New Course
-                        </button>
-                      )}
-                    </div>
+                    <p className="text-gray-500">No {status} courses.</p>
                   ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {courses[status].map(course => (
                         <CourseCard 
                           key={course.id} 
@@ -244,7 +170,6 @@ const TeacherDashboard = () => {
                           onPublish={publishCourse}
                           onMoveToDraft={moveToDraft}
                           onDelete={(id) => deleteCourse(id, status)}
-                          onEdit={handleEditCourse}
                         />
                       ))}
                     </div>
@@ -254,34 +179,18 @@ const TeacherDashboard = () => {
             </div>
           </div>
         )}
-        
         {activeTab === 'draft' && (
           <div>
-            <div className="flex items-center justify-between mb-6">
-              <h1 className="text-2xl font-semibold text-gray-800">Draft Courses</h1>
-              <button 
-                onClick={handleAddCourse} 
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
-                </svg>
-                New Course
-              </button>
-            </div>
-            
+            <h1 className="text-2xl font-semibold mb-4">Draft Courses</h1>
             {courses.draft.length === 0 ? (
-              <div className="bg-white rounded-lg shadow p-8 text-center">
-                <p className="text-gray-500 mb-4">You don't have any draft courses yet.</p>
-                <button 
-                  onClick={handleAddCourse}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition"
-                >
-                  Create Your First Course
+              <div className="text-center py-10">
+                <p className="text-gray-500">You don't have any draft courses yet.</p>
+                <button onClick={handleAddCourse} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">
+                  Create New Course
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {courses.draft.map(course => (
                   <CourseCard 
                     key={course.id} 
@@ -290,14 +199,12 @@ const TeacherDashboard = () => {
                     onPublish={publishCourse}
                     onMoveToDraft={moveToDraft}
                     onDelete={() => deleteCourse(course.id, 'draft')}
-                    onEdit={handleEditCourse}
                   />
                 ))}
               </div>
             )}
           </div>
         )}
-        
         {activeTab === 'profile' && (
           <ProfileForm 
             teacherProfile={teacherProfile} 
@@ -307,7 +214,6 @@ const TeacherDashboard = () => {
           />
         )}
       </div>
-      
       {showAddCourseModal && (
         <AddCourseModal 
           newCourse={newCourse}
@@ -324,7 +230,6 @@ const TeacherDashboard = () => {
           addQuizQuestion={addQuizQuestion}
           submitCourse={submitCourse}
           setShowAddCourseModal={setShowAddCourseModal}
-          isEditing={!!editingCourse}
         />
       )}
     </div>
