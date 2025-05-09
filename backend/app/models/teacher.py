@@ -1,43 +1,57 @@
-from pydantic import BaseModel, Field, HttpUrl
-from typing import List, Optional
 from datetime import datetime
-from uuid import uuid4
+from typing import List, Optional
+from pydantic import BaseModel, Field
+from bson import ObjectId
 
+class PyObjectId(str):
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
 
-class Resource(BaseModel):
+    @classmethod
+    def validate(cls, v):
+        return str(ObjectId(v)) if isinstance(v, ObjectId) else str(v)
+
+class Lesson(BaseModel):
     title: str
-    file_url: HttpUrl  # or use str if storing file paths
-    file_type: str     # e.g., 'pdf', 'zip', etc.
+    video_url: Optional[str] = None
+    duration: Optional[str] = None
+    resource_url: Optional[str] = None
+    summary: Optional[str] = None
 
+class QuizQuestion(BaseModel):
+    question: str
+    options: List[str] = Field(..., min_items=4, max_items=4)
+    correct_answer: int = Field(..., ge=0, le=3)
 
-class VideoLecture(BaseModel):
+class Quiz(BaseModel):
+    title: str = Field(default_factory=lambda: "Module Quiz")
+    questions: List[QuizQuestion] = []
+
+class Module(BaseModel):
     title: str
-    video_url: HttpUrl
-    duration_minutes: Optional[float]
-    is_preview: bool = False
+    description: Optional[str] = None
+    lessons: List[Lesson] = []
+    quiz: Optional[Quiz] = None
 
-
-class Lecture(BaseModel):
-    lecture_type: str  # 'video', 'resource', 'quiz', etc.
-    content: VideoLecture | Resource  # Use Union if you're on Python <3.10
-
-
-class Section(BaseModel):
+class CourseBase(BaseModel):
     title: str
-    lectures: List[Lecture]
-
-
-class CourseCreate(BaseModel):
-    teacher_id: str
-    title: str
-    subtitle: Optional[str]
     description: str
     category: str
-    subcategory: Optional[str]
-    level: str  # Beginner, Intermediate, Expert
-    language: str
-    price: float
-    thumbnail_url: Optional[HttpUrl]
-    sections: List[Section]
-    tags: Optional[List[str]] = []
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    thumbnail_url: Optional[str] = None
+
+class CourseCreate(CourseBase):
+    pass
+
+class Course(CourseBase):
+    id: Optional[PyObjectId] = Field(alias="_id")
+    created_at: datetime = Field(default_factory=datetime.now)
+    updated_at: datetime = Field(default_factory=datetime.now)
+    modules: List[Module] = []
+
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            ObjectId: str,
+            datetime: lambda v: v.isoformat()
+        }
