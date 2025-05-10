@@ -4,9 +4,10 @@ from pydantic import BaseModel, HttpUrl
 from typing import Optional, List
 from datetime import datetime
 from uuid import uuid4
-
+from app.database.mongo import courses_collection
 from app.models.course import CourseInDB,CourseCreate,CourseBase
 from bson import ObjectId
+
 
 router = APIRouter()
 

@@ -4,6 +4,8 @@ from app.routers import courses  # Correct import
 from app.routers import auth
 from motor.motor_asyncio import AsyncIOMotorClient
 from app.routers import teacher_courses
+from fastapi.staticfiles import StaticFiles
+import os
 
 
 app = FastAPI()
@@ -25,7 +27,9 @@ async def root():
 # Include course routes
 app.include_router(courses.router)
 app.include_router(auth.router)
-app.include_router(teacher_courses.router)
+app.include_router(teacher_courses.router, prefix="/teacher_courses", tags=["Teacher Courses"])
+UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
+app.mount("/static", StaticFiles(directory=UPLOAD_DIR), name="static")
 
 # Optional entry point to run app directly (avoids subprocess issues with --reload on Windows)
 if __name__ == "__main__":

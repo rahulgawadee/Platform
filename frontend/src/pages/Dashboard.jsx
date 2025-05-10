@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { 
-  Home, BookOpen, Calendar, ClipboardList, GraduationCap, Briefcase, Settings,
-  Bell, Search, User, ChevronRight, Clock, AlertCircle, TrendingUp, 
-  FileText, CheckCircle, Plus, Filter, Download, Users, File
-} from 'lucide-react';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  Home,
+  BookOpen,
+  Calendar,
+  ClipboardList,
+  GraduationCap,
+  Briefcase,
+  Settings,
+  Bell,
+  Search,
+  User,
+  ChevronRight,
+  Clock,
+  AlertCircle,
+  TrendingUp,
+  FileText,
+  CheckCircle,
+  Plus,
+  Filter,
+  Download,
+  Users,
+  File,
+} from "lucide-react";
 
 const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState('home');
-  const [userRole, setUserRole] = useState('student'); // 'student', 'teacher', 'admin', 'employer'
+  const [activeTab, setActiveTab] = useState("home");
+  const [userRole, setUserRole] = useState("student"); // 'student', 'teacher', 'admin', 'employer'
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -17,94 +35,126 @@ const Dashboard = () => {
         <div className="p-4 flex items-center justify-center border-b border-gray-200">
           <h1 className="text-xl font-bold text-indigo-600">Pratikly</h1>
         </div>
-        
+
         <nav className="flex-1 p-4">
           <ul className="space-y-2">
             <li>
-              <Link 
-                to="/" 
-                className={`flex items-center p-3 rounded-lg ${activeTab === 'home' ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-100'}`}
-                onClick={() => setActiveTab('home')}
+              <Link
+                to="/"
+                className={`flex items-center p-3 rounded-lg ${
+                  activeTab === "home"
+                    ? "bg-indigo-50 text-indigo-600"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+                onClick={() => setActiveTab("home")}
               >
                 <Home className="w-5 h-5 mr-3" />
                 <span>Home</span>
               </Link>
             </li>
-            
+
             <li>
-              <Link 
-                to="/courses" 
-                className={`flex items-center p-3 rounded-lg ${activeTab === 'courses' ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-100'}`}
-                onClick={() => setActiveTab('courses')}
+              <Link
+                to="/courses"
+                className={`flex items-center p-3 rounded-lg ${
+                  activeTab === "courses"
+                    ? "bg-indigo-50 text-indigo-600"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+                onClick={() => setActiveTab("courses")}
               >
                 <BookOpen className="w-5 h-5 mr-3" />
                 <span>My Courses</span>
               </Link>
             </li>
-            
+
             <li>
-              <Link 
-                to="/calendar" 
-                className={`flex items-center p-3 rounded-lg ${activeTab === 'calendar' ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-100'}`}
-                onClick={() => setActiveTab('calendar')}
+              <Link
+                to="/calendar"
+                className={`flex items-center p-3 rounded-lg ${
+                  activeTab === "calendar"
+                    ? "bg-indigo-50 text-indigo-600"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+                onClick={() => setActiveTab("calendar")}
               >
                 <Calendar className="w-5 h-5 mr-3" />
                 <span>Calendar</span>
               </Link>
             </li>
-            
+
             <li>
-              <Link 
-                to="/assignments" 
-                className={`flex items-center p-3 rounded-lg ${activeTab === 'assignments' ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-100'}`}
-                onClick={() => setActiveTab('assignments')}
+              <Link
+                to="/assignments"
+                className={`flex items-center p-3 rounded-lg ${
+                  activeTab === "assignments"
+                    ? "bg-indigo-50 text-indigo-600"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+                onClick={() => setActiveTab("assignments")}
               >
                 <ClipboardList className="w-5 h-5 mr-3" />
                 <span>Assignments</span>
               </Link>
             </li>
-            
-            {(userRole === 'teacher' || userRole === 'admin') && (
+
+            {(userRole === "teacher" || userRole === "admin") && (
               <li>
-                <Link 
-                  to="/grades" 
-                  className={`flex items-center p-3 rounded-lg ${activeTab === 'grades' ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-100'}`}
-                  onClick={() => setActiveTab('grades')}
+                <Link
+                  to="/grades"
+                  className={`flex items-center p-3 rounded-lg ${
+                    activeTab === "grades"
+                      ? "bg-indigo-50 text-indigo-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                  onClick={() => setActiveTab("grades")}
                 >
                   <FileText className="w-5 h-5 mr-3" />
                   <span>Grade Center</span>
                 </Link>
               </li>
             )}
-            
+
             <li>
-              <Link 
-                to="/internships" 
-                className={`flex items-center p-3 rounded-lg ${activeTab === 'internships' ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-100'}`}
-                onClick={() => setActiveTab('internships')}
+              <Link
+                to="/internships"
+                className={`flex items-center p-3 rounded-lg ${
+                  activeTab === "internships"
+                    ? "bg-indigo-50 text-indigo-600"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+                onClick={() => setActiveTab("internships")}
               >
                 <GraduationCap className="w-5 h-5 mr-3" />
                 <span>Internships</span>
               </Link>
             </li>
-            
+
             <li>
-              <Link 
-                to="/jobs" 
-                className={`flex items-center p-3 rounded-lg ${activeTab === 'jobs' ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-100'}`}
-                onClick={() => setActiveTab('jobs')}
+              <Link
+                to="/jobs"
+                className={`flex items-center p-3 rounded-lg ${
+                  activeTab === "jobs"
+                    ? "bg-indigo-50 text-indigo-600"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+                onClick={() => setActiveTab("jobs")}
               >
                 <Briefcase className="w-5 h-5 mr-3" />
                 <span>Job Board</span>
               </Link>
             </li>
-            
-            {userRole === 'admin' && (
+
+            {userRole === "admin" && (
               <li>
-                <Link 
-                  to="/admin" 
-                  className={`flex items-center p-3 rounded-lg ${activeTab === 'admin' ? 'bg-indigo-50 text-indigo-600' : 'text-gray-700 hover:bg-gray-100'}`}
-                  onClick={() => setActiveTab('admin')}
+                <Link
+                  to="/admin"
+                  className={`flex items-center p-3 rounded-lg ${
+                    activeTab === "admin"
+                      ? "bg-indigo-50 text-indigo-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                  onClick={() => setActiveTab("admin")}
                 >
                   <Settings className="w-5 h-5 mr-3" />
                   <span>Admin Panel</span>
@@ -117,7 +167,6 @@ const Dashboard = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
-       
         {/* Dynamic Content Area */}
         <main className="flex-1 overflow-y-auto p-6">
           <Routes>
@@ -141,7 +190,7 @@ const HomeTab = ({ userRole }) => {
   return (
     <div>
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Welcome Back!</h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Upcoming Deadlines */}
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
@@ -150,7 +199,9 @@ const HomeTab = ({ userRole }) => {
               <Clock className="w-5 h-5 mr-2 text-indigo-600" />
               Upcoming Deadlines
             </h3>
-            <button className="text-sm text-indigo-600 hover:text-indigo-800">View All</button>
+            <button className="text-sm text-indigo-600 hover:text-indigo-800">
+              View All
+            </button>
           </div>
           <ul className="space-y-3">
             <li className="flex items-start">
@@ -173,7 +224,7 @@ const HomeTab = ({ userRole }) => {
             </li>
           </ul>
         </div>
-        
+
         {/* Recent Announcements */}
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-4">
@@ -181,7 +232,9 @@ const HomeTab = ({ userRole }) => {
               <AlertCircle className="w-5 h-5 mr-2 text-indigo-600" />
               Announcements
             </h3>
-            <button className="text-sm text-indigo-600 hover:text-indigo-800">View All</button>
+            <button className="text-sm text-indigo-600 hover:text-indigo-800">
+              View All
+            </button>
           </div>
           <ul className="space-y-3">
             <li className="flex items-start">
@@ -204,7 +257,7 @@ const HomeTab = ({ userRole }) => {
             </li>
           </ul>
         </div>
-        
+
         {/* Course Progress */}
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <div className="flex items-center justify-between mb-4">
@@ -212,7 +265,9 @@ const HomeTab = ({ userRole }) => {
               <TrendingUp className="w-5 h-5 mr-2 text-indigo-600" />
               Course Progress
             </h3>
-            <button className="text-sm text-indigo-600 hover:text-indigo-800">View All</button>
+            <button className="text-sm text-indigo-600 hover:text-indigo-800">
+              View All
+            </button>
           </div>
           <div className="space-y-4">
             <div>
@@ -221,7 +276,10 @@ const HomeTab = ({ userRole }) => {
                 <span>75%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-indigo-600 h-2 rounded-full" style={{ width: '75%' }}></div>
+                <div
+                  className="bg-indigo-600 h-2 rounded-full"
+                  style={{ width: "75%" }}
+                ></div>
               </div>
             </div>
             <div>
@@ -230,21 +288,26 @@ const HomeTab = ({ userRole }) => {
                 <span>30%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-indigo-600 h-2 rounded-full" style={{ width: '30%' }}></div>
+                <div
+                  className="bg-indigo-600 h-2 rounded-full"
+                  style={{ width: "30%" }}
+                ></div>
               </div>
             </div>
           </div>
         </div>
-        
+
         {/* Internship Opportunities */}
-        {userRole === 'student' && (
+        {userRole === "student" && (
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-lg flex items-center">
                 <GraduationCap className="w-5 h-5 mr-2 text-indigo-600" />
                 Recommended Internships
               </h3>
-              <button className="text-sm text-indigo-600 hover:text-indigo-800">View All</button>
+              <button className="text-sm text-indigo-600 hover:text-indigo-800">
+                View All
+              </button>
             </div>
             <ul className="space-y-3">
               <li className="flex items-start">
@@ -283,7 +346,7 @@ const CoursesTab = () => {
           Add Course
         </button>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Example Course Card */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
@@ -299,7 +362,10 @@ const CoursesTab = () => {
                 <span>75%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-indigo-600 h-2 rounded-full" style={{ width: '75%' }}></div>
+                <div
+                  className="bg-indigo-600 h-2 rounded-full"
+                  style={{ width: "75%" }}
+                ></div>
               </div>
             </div>
             <button className="w-full py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center justify-center">
@@ -307,13 +373,15 @@ const CoursesTab = () => {
             </button>
           </div>
         </div>
-        
+
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="h-32 bg-indigo-100 flex items-center justify-center">
             <BookOpen className="w-12 h-12 text-indigo-600" />
           </div>
           <div className="p-6">
-            <h3 className="font-bold text-lg mb-1">Data Science Fundamentals</h3>
+            <h3 className="font-bold text-lg mb-1">
+              Data Science Fundamentals
+            </h3>
             <p className="text-gray-500 mb-3">Instructor: Jane Smith</p>
             <div className="mb-4">
               <div className="flex justify-between text-sm mb-1">
@@ -321,7 +389,10 @@ const CoursesTab = () => {
                 <span>30%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-indigo-600 h-2 rounded-full" style={{ width: '30%' }}></div>
+                <div
+                  className="bg-indigo-600 h-2 rounded-full"
+                  style={{ width: "30%" }}
+                ></div>
               </div>
             </div>
             <button className="w-full py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center justify-center">
@@ -341,7 +412,9 @@ const CalendarTab = () => {
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
         {/* Calendar component would go here */}
         <div className="h-96 flex items-center justify-center bg-gray-50 rounded-lg">
-          <p className="text-gray-500">[Calendar View with assignments, classes, and events]</p>
+          <p className="text-gray-500">
+            [Calendar View with assignments, classes, and events]
+          </p>
         </div>
       </div>
     </div>
@@ -355,16 +428,22 @@ const AssignmentsTab = () => {
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <div className="flex space-x-4">
-            <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg">All</button>
-            <button className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Pending</button>
-            <button className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Submitted</button>
+            <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg">
+              All
+            </button>
+            <button className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+              Pending
+            </button>
+            <button className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+              Submitted
+            </button>
           </div>
           <button className="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
             <Download className="w-5 h-5 mr-2" />
             Export
           </button>
         </div>
-        
+
         <div className="divide-y divide-gray-200">
           <div className="p-4 hover:bg-gray-50">
             <div className="flex justify-between items-start">
@@ -381,7 +460,7 @@ const AssignmentsTab = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="p-4 hover:bg-gray-50">
             <div className="flex justify-between items-start">
               <div>
@@ -411,18 +490,46 @@ const GradesTab = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assignment</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Grade</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Feedback</th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Course
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Assignment
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Grade
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Feedback
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               <tr>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Web Development</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Assignment 1</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">85%</td>
-                <td className="px-6 py-4 text-sm text-gray-500">Good work, but needs more comments in code.</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  Web Development
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  Assignment 1
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  85%
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-500">
+                  Good work, but needs more comments in code.
+                </td>
               </tr>
             </tbody>
           </table>
@@ -436,19 +543,23 @@ const InternshipsTab = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Internship Opportunities</h2>
+        <h2 className="text-2xl font-bold text-gray-800">
+          Internship Opportunities
+        </h2>
         <button className="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
           <Plus className="w-5 h-5 mr-2" />
           New Internship
         </button>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="p-6">
             <div className="flex justify-between items-start mb-4">
               <div>
-                <h3 className="font-bold text-lg mb-1">Frontend Developer Intern</h3>
+                <h3 className="font-bold text-lg mb-1">
+                  Frontend Developer Intern
+                </h3>
                 <p className="text-gray-500">Company: TechCorp</p>
               </div>
               <div className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
@@ -470,7 +581,7 @@ const InternshipsTab = () => {
             </button>
           </div>
         </div>
-        
+
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="p-6">
             <div className="flex justify-between items-start mb-4">
@@ -503,7 +614,7 @@ const JobsTab = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Job Board</h2>
-      
+
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="relative flex-1">
@@ -534,7 +645,7 @@ const JobsTab = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="space-y-4">
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="p-6">
@@ -570,7 +681,7 @@ const AdminTab = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Admin Panel</h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <button className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition-all">
           <div className="flex items-center">
@@ -580,7 +691,7 @@ const AdminTab = () => {
             <span className="font-medium">Manage Users</span>
           </div>
         </button>
-        
+
         <button className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition-all">
           <div className="flex items-center">
             <div className="p-3 rounded-lg bg-indigo-100 mr-4">
@@ -589,7 +700,7 @@ const AdminTab = () => {
             <span className="font-medium">Manage Courses</span>
           </div>
         </button>
-        
+
         <button className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition-all">
           <div className="flex items-center">
             <div className="p-3 rounded-lg bg-indigo-100 mr-4">
@@ -598,7 +709,7 @@ const AdminTab = () => {
             <span className="font-medium">System Settings</span>
           </div>
         </button>
-        
+
         <button className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition-all">
           <div className="flex items-center">
             <div className="p-3 rounded-lg bg-indigo-100 mr-4">
